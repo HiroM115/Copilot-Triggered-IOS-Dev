@@ -197,8 +197,9 @@ struct ThinkingIndicator: View {
     }
     
     private func stopAnimation() {
-        timer?.invalidate()
-        timer = nil
+        guard let timer = timer else { return }
+        timer.invalidate()
+        self.timer = nil
     }
 }
 

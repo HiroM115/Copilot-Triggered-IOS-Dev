@@ -119,11 +119,11 @@ final class AIDrivenUtilitiesTests: XCTestCase {
         // When: Generating a short UUID
         let shortUUID = AIDrivenUtilities.generateShortUUID()
         
-        // Then: It should only contain valid hex characters
-        let hexCharacterSet = CharacterSet(charactersIn: "0123456789ABCDEF-")
+        // Then: It should only contain valid hex characters (no hyphens in first 8 chars)
+        let hexCharacterSet = CharacterSet(charactersIn: "0123456789ABCDEF")
         XCTAssertTrue(
             shortUUID.uppercased().unicodeScalars.allSatisfy { hexCharacterSet.contains($0) },
-            "Short UUID should only contain valid UUID characters"
+            "Short UUID should only contain hexadecimal characters (no hyphens)"
         )
     }
 }
