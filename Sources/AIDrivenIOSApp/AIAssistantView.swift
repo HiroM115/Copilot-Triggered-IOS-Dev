@@ -164,6 +164,7 @@ struct MessageBubble: View {
 /// Thinking indicator animation
 struct ThinkingIndicator: View {
     @State private var animationPhase = 0
+    @State private var timer: Timer?
     
     var body: some View {
         HStack(spacing: 8) {
@@ -181,14 +182,22 @@ struct ThinkingIndicator: View {
         .onAppear {
             startAnimation()
         }
+        .onDisappear {
+            stopAnimation()
+        }
     }
     
     private func startAnimation() {
-        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true) { _ in
             withAnimation {
                 animationPhase = (animationPhase + 1) % 3
             }
         }
+    }
+    
+    private func stopAnimation() {
+        timer?.invalidate()
+        timer = nil
     }
 }
 
