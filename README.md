@@ -2,6 +2,8 @@
 
 AI駆動開発のためのiOSアプリケーションプロジェクト / iOS Application Project for AI-Driven Development
 
+An iOS development repository enhanced with GitHub Copilot custom instructions, development environment configuration, and Model Context Protocol (MCP) server integration.
+
 ## 🚀 概要 / Overview
 
 このプロジェクトは、GitHub Copilot Proを最大限活用してiOS開発を行うためのサンプルアプリケーションです。SwiftUIを使用したモダンなiOSアプリケーション開発のベストプラクティスを示します。
@@ -19,6 +21,50 @@ This project is a sample application for iOS development that makes full use of 
 - **AI Features Sample**: Demo of AI-driven suggestion features
 - **Task Management**: Create, edit, and manage task completion status
 - **Modern Architecture**: MVVM pattern and latest Swift features
+
+## 🤖 GitHub Copilot Configuration
+
+This repository is configured to provide an enhanced development experience with GitHub Copilot through:
+
+### Custom Instructions
+
+Custom instructions are defined in `.github/copilot-instructions.md` to provide Copilot with:
+- Project-specific context and conventions
+- iOS development best practices
+- Code style guidelines
+- Security and privacy considerations
+- Testing and documentation standards
+
+These instructions help Copilot generate more relevant and context-aware suggestions tailored to iOS development.
+
+### Development Environment
+
+A development container configuration is available in `.devcontainer/devcontainer.json` that includes:
+- Pre-configured development tools and extensions
+- GitHub Copilot and Copilot Chat extensions
+- Optimized VS Code settings for iOS development
+- Support for Swift and Objective-C file associations
+- Automatic formatting and linting setup
+
+**Note:** This container provides general development tools and Copilot configuration. Actual iOS app compilation requires macOS with Xcode installed. The devcontainer is suitable for documentation, scripts, configuration, and leveraging Copilot's assistance.
+
+To use the development container:
+1. Install Docker and VS Code with the Remote-Containers extension
+2. Open this repository in VS Code
+3. When prompted, click "Reopen in Container" or use the command palette: "Remote-Containers: Reopen in Container"
+
+### Model Context Protocol (MCP) Servers
+
+MCP server configuration in `.github/copilot-mcp-config.json` enables Copilot to:
+- Access filesystem for reading and writing project files
+- Interact with GitHub API for repository operations
+- Perform Git operations for version control
+- Fetch web content for documentation and resources
+
+To use MCP servers with Copilot:
+1. Ensure you have Node.js installed (for npx commands)
+2. Set up the required environment variables (e.g., `GITHUB_TOKEN`)
+3. Configure your GitHub Copilot to use the MCP configuration file
 
 ## 🛠️ セットアップ / Setup
 
@@ -43,6 +89,8 @@ open CopilotIOSApp/CopilotIOSApp.xcodeproj
 ```
 
 3. シミュレータまたは実機を選択してビルド / Select a simulator or device and build
+
+4. (オプション) Use the devcontainer for a consistent development environment
 
 ## 💡 Copilot Proを使った開発のコツ / Tips for Development with Copilot Pro
 
@@ -122,6 +170,8 @@ CopilotIOSApp/
 プルリクエストを歓迎します！大きな変更の場合は、まずissueを開いて変更内容を議論してください。
 
 Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+When contributing to this project, please follow the guidelines in `.github/copilot-instructions.md` to maintain consistency with the project's coding standards and best practices.
 
 ## 📄 ライセンス / License
 
