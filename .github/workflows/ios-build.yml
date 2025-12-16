@@ -11,6 +11,9 @@ jobs:
     name: Build and Test iOS App
     runs-on: macos-latest
     
+    permissions:
+      contents: read
+    
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -60,6 +63,9 @@ jobs:
   swift-package-test:
     name: Swift Package Manager Tests
     runs-on: macos-latest
+    
+    permissions:
+      contents: read
     
     steps:
     - name: Checkout repository
