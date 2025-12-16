@@ -1,26 +1,124 @@
-# Copilot-Triggered-IOS-Dev
+# AI駆動型iOS開発 / AI-Driven iOS Development
 
-AI駆動開発のためのiOSアプリケーションプロジェクト / iOS Application Project for AI-Driven Development
+GitHub Copilotを活用したプロダクション対応のiOSアプリケーション実装例
 
-An iOS development repository enhanced with GitHub Copilot custom instructions, development environment configuration, and Model Context Protocol (MCP) server integration.
+Production-ready iOS application demonstrating AI-driven development with GitHub Copilot
 
-## 🚀 概要 / Overview
+[![Swift](https://img.shields.io/badge/Swift-5.9+-orange.svg)](https://swift.org)
+[![Platform](https://img.shields.io/badge/Platform-iOS%2015.0+-lightgrey.svg)](https://developer.apple.com/ios/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![GitHub Actions](https://github.com/HiroM115/Copilot-Triggered-IOS-Dev/workflows/iOS%20Build/badge.svg)](https://github.com/HiroM115/Copilot-Triggered-IOS-Dev/actions)
 
-このプロジェクトは、GitHub Copilot Proを最大限活用してiOS開発を行うためのサンプルアプリケーションです。SwiftUIを使用したモダンなiOSアプリケーション開発のベストプラクティスを示します。
+## ✨ 主な機能 / Key Features
 
-This project is a sample application for iOS development that makes full use of GitHub Copilot Pro. It demonstrates best practices for modern iOS application development using SwiftUI.
+### 📱 SwiftUI アプリケーション
+- **インタラクティブデモ** - メール検証、日付フォーマット、UUID生成
+- **AIチャットUI** - メッセージバブル、タイピングインジケーター、リアルタイム応答
+- **モダンなUI/UX** - SwiftUIベースの洗練されたインターフェース
+- **メモリ安全** - 適切なタイマーライフサイクル管理
 
-## 📱 機能 / Features
+### 🛠️ プラットフォーム非依存ユーティリティ
+- ✉️ メールアドレス検証（RFC 5322準拠）
+- 📅 日付フォーマット（長形式・相対時間）
+- 🔢 UUID生成（フル・短縮形式）
+- ✅ 包括的なユニットテスト
 
-- **SwiftUI**: 最新のSwiftUIフレームワークを使用した宣言的UI
-- **AI機能サンプル**: AI駆動の提案機能のデモ
-- **タスク管理**: タスクの作成、編集、完了状態の管理
-- **モダンなアーキテクチャ**: MVVMパターンとSwiftの最新機能
+### 🔒 プロダクション品質
+- **CodeQL統合** - 自動セキュリティスキャン
+- **CI/CDパイプライン** - iOS自動ビルド・テスト
+- **メモリリーク対策** - ThinkingIndicatorでのTimer無効化
+- **最小権限** - GitHub Actions permissions: `contents: read`
 
-- **SwiftUI**: Declarative UI using the latest SwiftUI framework
-- **AI Features Sample**: Demo of AI-driven suggestion features
-- **Task Management**: Create, edit, and manage task completion status
-- **Modern Architecture**: MVVM pattern and latest Swift features
+## 🚀 クイックスタート / Quick Start
+
+### 必須環境 / Prerequisites
+
+```bash
+# macOS 12.0+ および Xcode 14.0+ が必要
+# Requires macOS 12.0+ and Xcode 14.0+
+sw_vers
+xcode-select --version
+```
+
+### インストールと実行 / Installation & Run
+
+```bash
+# 1. リポジトリをクローン / Clone repository
+git clone https://github.com/HiroM115/Copilot-Triggered-IOS-Dev.git
+cd Copilot-Triggered-IOS-Dev
+
+# 2. ビルド / Build
+swift build
+
+# 3. テスト実行 / Run tests
+swift test
+
+# 4. Xcodeで開く / Open in Xcode
+open Package.swift
+```
+
+**Xcodeでの実行** / Run in Xcode:
+1. スキーム選択: `AIDrivenIOSApp`
+2. ターゲット: iPhone Simulator
+3. `⌘ + R` で実行
+
+### 📚 ドキュメント / Documentation
+
+| ドキュメント | 説明 | 所要時間 |
+|------------|------|---------|
+| [QUICKSTART.md](docs/QUICKSTART.md) | 5分で始める実践ガイド | 5分 |
+| [COPILOT_GUIDE.md](docs/COPILOT_GUIDE.md) | Copilot活用パターン・ショートカット | 30分 |
+| [BUILD_NOTES.md](docs/BUILD_NOTES.md) | macOS/Xcode要件の詳細説明 | 15分 |
+| [PROJECT_OVERVIEW.md](docs/PROJECT_OVERVIEW.md) | 学習パス・貢献ガイド | 1時間 |
+| [SETUP.md](docs/SETUP.md) | 開発環境セットアップガイド | 15分 |
+| [AI_DRIVEN_DEVELOPMENT.md](docs/AI_DRIVEN_DEVELOPMENT.md) | AI駆動開発のベストプラクティス | 30分 |
+
+## 🧪 テスト / Testing
+
+### ユニットテスト例 / Unit Test Example
+
+```swift
+func testEmailValidation() throws {
+    // Given: 有効なメールアドレス
+    XCTAssertTrue(AIDrivenUtilities.isValidEmail("user@example.com"))
+    
+    // Given: 無効なメールアドレス
+    XCTAssertFalse(AIDrivenUtilities.isValidEmail("invalid.email"))
+}
+```
+
+**テスト実行** / Run Tests:
+```bash
+swift test                           # 全テスト
+swift test --enable-code-coverage   # カバレッジ付き
+```
+
+**注意** / Note: SwiftUI UIコンポーネントはmacOS + Xcode必須。Linuxビルドは意図的にUI部分で失敗しますが、ユーティリティ層のテストは通過します。
+
+## 🏗️ プロジェクト構成 / Project Structure
+
+```
+Sources/AIDrivenIOSApp/
+├── AIDrivenApp.swift          # @main エントリーポイント
+├── ContentView.swift          # メインUI・インタラクティブデモ
+├── AIAssistantView.swift      # チャットUI（バブル・タイピング表示）
+└── AIDrivenUtilities.swift    # プラットフォーム非依存ユーティリティ
+
+Tests/AIDrivenIOSAppTests/
+└── AIDrivenUtilitiesTests.swift # ユニットテスト
+
+docs/
+├── QUICKSTART.md              # 5分クイックスタート
+├── COPILOT_GUIDE.md          # Copilot高度な使い方
+├── BUILD_NOTES.md            # ビルド要件詳細
+├── PROJECT_OVERVIEW.md       # 完全な学習パス
+├── SETUP.md                  # 開発環境セットアップ
+└── AI_DRIVEN_DEVELOPMENT.md  # AI駆動開発ガイド
+
+.github/workflows/
+├── ios-build.yml             # iOS CI/CD
+└── codeql.yml                # セキュリティスキャン
+```
 
 ## 🤖 GitHub Copilot Configuration
 
@@ -66,32 +164,6 @@ To use MCP servers with Copilot:
 2. Set up the required environment variables (e.g., `GITHUB_TOKEN`)
 3. Configure your GitHub Copilot to use the MCP configuration file
 
-## 🛠️ セットアップ / Setup
-
-### 必要要件 / Requirements
-
-- macOS 13.0以降 / macOS 13.0 or later
-- Xcode 15.0以降 / Xcode 15.0 or later
-- iOS 17.0以降のシミュレータまたは実機 / iOS 17.0+ simulator or device
-- GitHub Copilot Proサブスクリプション（推奨）/ GitHub Copilot Pro subscription (recommended)
-
-### インストール / Installation
-
-1. リポジトリをクローン / Clone the repository:
-```bash
-git clone https://github.com/HiroM115/Copilot-Triggered-IOS-Dev.git
-cd Copilot-Triggered-IOS-Dev
-```
-
-2. Xcodeでプロジェクトを開く / Open the project in Xcode:
-```bash
-open CopilotIOSApp/CopilotIOSApp.xcodeproj
-```
-
-3. シミュレータまたは実機を選択してビルド / Select a simulator or device and build
-
-4. (オプション) Use the devcontainer for a consistent development environment
-
 ## 💡 Copilot Proを使った開発のコツ / Tips for Development with Copilot Pro
 
 ### 1. コメント駆動開発 / Comment-Driven Development
@@ -135,21 +207,6 @@ func testUserAuthentication() {
 既存のコードパターンを認識し、一貫したコードを生成します。
 
 Recognizes existing code patterns and generates consistent code.
-
-## 🏗️ プロジェクト構造 / Project Structure
-
-```
-CopilotIOSApp/
-├── CopilotIOSApp/
-│   ├── CopilotIOSAppApp.swift      # アプリケーションエントリポイント
-│   ├── ContentView.swift            # メインビュー
-│   ├── AIFeaturesView.swift         # AI機能デモ
-│   ├── Info.plist                   # アプリ設定
-│   ├── Models/
-│   │   └── TaskItem.swift           # タスクデータモデル
-│   └── Views/
-│       └── TaskListView.swift       # タスク一覧ビュー
-```
 
 ## 🎯 開発のベストプラクティス / Development Best Practices
 

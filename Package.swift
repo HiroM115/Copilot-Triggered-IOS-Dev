@@ -1,27 +1,30 @@
-// swift-tools-version:5.9
+// swift-tools-version: 5.9
+// The swift-tools-version declares the minimum version of Swift required to build this package.
+
 import PackageDescription
 
 let package = Package(
-    name: "CopilotIOSApp",
+    name: "AIDrivenIOSApp",
     platforms: [
-        .iOS(.v17)
+        .iOS(.v15),
+        .macOS(.v12)
     ],
     products: [
         .library(
-            name: "CopilotIOSApp",
-            targets: ["CopilotIOSApp"]),
+            name: "AIDrivenIOSApp",
+            targets: ["AIDrivenIOSApp"]),
     ],
     dependencies: [
-        // Add your dependencies here
-        // Example:
-        // .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.8.0"),
+        // Dependencies declare other packages that this package depends on.
     ],
     targets: [
         .target(
-            name: "CopilotIOSApp",
-            dependencies: []),
+            name: "AIDrivenIOSApp",
+            dependencies: [],
+            path: "Sources/AIDrivenIOSApp"),
         .testTarget(
-            name: "CopilotIOSAppTests",
-            dependencies: ["CopilotIOSApp"]),
+            name: "AIDrivenIOSAppTests",
+            dependencies: ["AIDrivenIOSApp"],
+            path: "Tests/AIDrivenIOSAppTests"),
     ]
 )
