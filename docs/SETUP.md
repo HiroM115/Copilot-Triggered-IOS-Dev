@@ -181,7 +181,7 @@ The project already includes .gitignore.
 
 ```swift
 --indent 4
---swiftversion 5.9
+--swiftversion 6.0
 --disable redundantSelf
 ```
 
