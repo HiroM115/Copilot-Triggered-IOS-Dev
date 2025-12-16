@@ -33,8 +33,10 @@ struct ContentView: View {
                         VStack(alignment: .leading, spacing: 12) {
                             TextField("Enter email address", text: $emailInput)
                                 .textFieldStyle(.roundedBorder)
+                                #if os(iOS)
                                 .textInputAutocapitalization(.never)
                                 .keyboardType(.emailAddress)
+                                #endif
                             
                             Button(action: validateEmail) {
                                 Label("Validate", systemImage: "checkmark.circle")

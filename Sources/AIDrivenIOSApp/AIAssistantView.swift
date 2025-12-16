@@ -59,7 +59,11 @@ struct AIAssistantView: View {
                     .disabled(inputText.isEmpty || isThinking)
                 }
                 .padding()
-                .background(Color(.systemBackground))
+                #if os(iOS)
+                .background(Color(uiColor: .systemBackground))
+                #else
+                .background(Color(nsColor: .windowBackgroundColor))
+                #endif
             }
             .navigationTitle("AI Assistant")
             .navigationBarTitleDisplayMode(.inline)
@@ -138,7 +142,11 @@ struct MessageBubble: View {
                 Text(message.content)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 10)
-                    .background(message.isUser ? Color.blue : Color(.systemGray5))
+                    #if os(iOS)
+                    .background(message.isUser ? Color.blue : Color(uiColor: .systemGray5))
+                    #else
+                    .background(message.isUser ? Color.blue : Color(nsColor: .systemGray))
+                    #endif
                     .foregroundColor(message.isUser ? .white : .primary)
                     .clipShape(RoundedRectangle(cornerRadius: 18))
                 
@@ -178,7 +186,11 @@ struct ThinkingIndicator: View {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
-        .background(Color(.systemGray5))
+        #if os(iOS)
+        .background(Color(uiColor: .systemGray5))
+        #else
+        .background(Color(nsColor: .systemGray))
+        #endif
         .clipShape(RoundedRectangle(cornerRadius: 18))
         .frame(maxWidth: .infinity, alignment: .leading)
         .onAppear {
