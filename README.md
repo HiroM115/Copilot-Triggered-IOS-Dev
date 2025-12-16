@@ -1,159 +1,64 @@
-# AI-Driven iOS Development with GitHub Copilot Pro
+# Copilot-Triggered-IOS-Dev
 
-[![Swift](https://img.shields.io/badge/Swift-5.9-orange.svg)](https://swift.org)
-[![iOS](https://img.shields.io/badge/iOS-17.0+-blue.svg)](https://www.apple.com/ios/)
-[![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-Pro-purple.svg)](https://github.com/features/copilot)
+An iOS development repository enhanced with GitHub Copilot custom instructions, development environment configuration, and Model Context Protocol (MCP) server integration.
 
-iPhone/iPad 上で GitHub Copilot Pro を活用した AI 駆動開発のためのサンプルプロジェクトです。
+## 🤖 GitHub Copilot Configuration
 
-> 📚 **すぐに始めたい方は [QUICKSTART.md](./QUICKSTART.md) をご覧ください！**
+This repository is configured to provide an enhanced development experience with GitHub Copilot through:
 
-## 🎯 プロジェクトの目的
+### Custom Instructions
 
-このプロジェクトは、GitHub Copilot Pro を最大限に活用して iOS アプリケーション開発を効率化する方法を示します。SwiftUI を使用したモダンな iOS 開発のベストプラクティスを学べます。
+Custom instructions are defined in `.github/copilot-instructions.md` to provide Copilot with:
+- Project-specific context and conventions
+- iOS development best practices
+- Code style guidelines
+- Security and privacy considerations
+- Testing and documentation standards
 
-## ✨ 機能
+These instructions help Copilot generate more relevant and context-aware suggestions tailored to iOS development.
 
-- **AI コード生成**: GitHub Copilot による Swift コードの自動生成
-- **スマート補完**: コンテキストに応じたインテリジェントなコード補完
-- **ベストプラクティス**: iOS 開発のパターンとガイドラインに従った実装
-- **SwiftUI ベース**: 最新の SwiftUI フレームワークを使用
-- **Swift Package Manager**: 依存関係管理に SPM を使用
+### Development Environment
 
-## 🚀 はじめに
+A development container configuration is available in `.devcontainer/devcontainer.json` that includes:
+- Pre-configured development tools and extensions
+- GitHub Copilot and Copilot Chat extensions
+- Optimized VS Code settings for iOS development
+- Support for Swift and Objective-C file associations
+- Automatic formatting and linting setup
 
-### 必要要件
+**Note:** This container provides general development tools and Copilot configuration. Actual iOS app compilation requires macOS with Xcode installed. The devcontainer is suitable for documentation, scripts, configuration, and leveraging Copilot's assistance.
 
-- macOS 13.0 以上
-- Xcode 15.0 以上
-- Swift 5.9 以上
-- GitHub Copilot Pro サブスクリプション
+To use the development container:
+1. Install Docker and VS Code with the Remote-Containers extension
+2. Open this repository in VS Code
+3. When prompted, click "Reopen in Container" or use the command palette: "Remote-Containers: Reopen in Container"
 
-### セットアップ
+### Model Context Protocol (MCP) Servers
 
-1. リポジトリをクローン:
-```bash
-git clone https://github.com/HiroM115/Copilot-Triggered-IOS-Dev.git
-cd Copilot-Triggered-IOS-Dev
-```
+MCP server configuration in `.github/copilot-mcp-config.json` enables Copilot to:
+- Access filesystem for reading and writing project files
+- Interact with GitHub API for repository operations
+- Perform Git operations for version control
+- Fetch web content for documentation and resources
 
-2. Xcode でプロジェクトを開く:
-```bash
-open Package.swift
-```
+To use MCP servers with Copilot:
+1. Ensure you have Node.js installed (for npx commands)
+2. Set up the required environment variables (e.g., `GITHUB_TOKEN`)
+3. Configure your GitHub Copilot to use the MCP configuration file
 
-3. ビルドして実行:
-- Xcode で `Product > Run` を選択するか、`⌘R` を押す
+## Getting Started
 
-### Swift Package Manager でのビルド
+### Prerequisites
+- Xcode (for iOS development)
+- GitHub Copilot subscription
+- VS Code with GitHub Copilot extension (recommended)
 
-```bash
-swift build
-```
+### Setup
+1. Clone this repository
+2. Open in VS Code or your preferred IDE with GitHub Copilot
+3. Copilot will automatically use the custom instructions
+4. (Optional) Use the devcontainer for a consistent development environment
 
-### テストの実行
+## Contributing
 
-```bash
-swift test
-```
-
-## 💡 GitHub Copilot Pro の活用方法
-
-### 1. コード生成
-
-コメントを書くことで、Copilot が自動的にコードを提案します:
-
-```swift
-// Function to fetch user data from API
-// Copilot will suggest the implementation
-```
-
-### 2. SwiftUI ビューの作成
-
-```swift
-// Create a card view with title, description, and image
-// Copilot will generate a complete SwiftUI view
-```
-
-### 3. 関数の実装
-
-関数名と引数を定義すると、Copilot が実装を提案:
-
-```swift
-func validateEmail(_ email: String) -> Bool {
-    // Copilot suggests validation logic
-}
-```
-
-### 4. テストの作成
-
-テストケースの記述も Copilot がサポート:
-
-```swift
-func testEmailValidation() {
-    // Copilot suggests test cases
-}
-```
-
-## 📱 プロジェクト構造
-
-```
-Copilot-Triggered-IOS-Dev/
-├── Package.swift                    # Swift Package Manager 設定
-├── Sources/
-│   └── AIDrivenIOSApp/
-│       ├── AIDrivenApp.swift       # アプリのエントリーポイント
-│       └── ContentView.swift       # メインビュー
-├── Tests/
-│   └── AIDrivenIOSAppTests/
-│       └── AIDrivenIOSAppTests.swift
-└── README.md
-```
-
-## 🎨 デザインパターン
-
-このプロジェクトでは以下のパターンを使用:
-
-- **MVVM**: Model-View-ViewModel アーキテクチャ
-- **SwiftUI**: 宣言的 UI フレームワーク
-- **Combine**: リアクティブプログラミング（必要に応じて）
-- **Async/Await**: モダンな非同期処理
-
-## 🛠️ 開発のヒント
-
-### Copilot を効果的に使う
-
-1. **明確なコメント**: 期待する動作を具体的に記述
-2. **型定義**: 適切な型を定義して Copilot にコンテキストを提供
-3. **命名規則**: わかりやすい変数名・関数名を使用
-4. **段階的な開発**: 小さな機能から始めて徐々に拡張
-
-### ベストプラクティス
-
-- SwiftUI のプレビュー機能を活用してリアルタイムで UI を確認
-- 単体テストを書いてコードの品質を保証
-- Swift の型システムを活用して安全なコードを記述
-- iOS のヒューマンインターフェイスガイドラインに従う
-
-## 📚 リソース
-
-- [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
-- [SwiftUI Tutorials](https://developer.apple.com/tutorials/swiftui)
-- [Swift Documentation](https://swift.org/documentation/)
-- [iOS Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/ios)
-
-## 🤝 コントリビューション
-
-プルリクエストを歓迎します！大きな変更の場合は、まず Issue を開いて変更内容を議論してください。
-
-## 📄 ライセンス
-
-このプロジェクトはオープンソースです。
-
-## 🌟 謝辞
-
-GitHub Copilot Pro の強力な AI サポートにより、このプロジェクトの開発が加速されました。
-
----
-
-**Note**: このプロジェクトは GitHub Copilot Pro を使った iOS 開発の学習とデモンストレーションを目的としています。
+When contributing to this project, please follow the guidelines in `.github/copilot-instructions.md` to maintain consistency with the project's coding standards and best practices.
