@@ -1,0 +1,50 @@
+name: iOS Build and Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Build and Test iOS App
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Select Xcode version
+      run: sudo xcode-select --switch /Applications/Xcode.app
+    
+    - name: Show Xcode version
+      run: xcodebuild -version
+    
+    - name: Show Swift version
+      run: swift --version
+    
+    - name: Build with Swift Package Manager
+      run: swift build -v
+    
+    - name: Run tests
+      run: swift test -v --enable-code-coverage
+    
+    - name: Generate code coverage report
+      run: |
+        xcrun llvm-cov export \
+          .build/debug/AIDrivenIOSAppPackageTests.xctest/Contents/MacOS/AIDrivenIOSAppPackageTests \
+          -instr-profile=.build/debug/codecov/default.profdata \
+          -format=lcov > coverage.lcov || true
+    
+    - name: Display coverage summary
+      run: |
+        if [ -f coverage.lcov ]; then
+          echo "Code coverage report generated"
+          head -n 20 coverage.lcov
+        else
+          echo "No coverage report generated"
+        fi
