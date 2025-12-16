@@ -23,8 +23,10 @@ A development container configuration is available in `.devcontainer/devcontaine
 - Pre-configured development tools and extensions
 - GitHub Copilot and Copilot Chat extensions
 - Optimized VS Code settings for iOS development
-- Support for Swift and Objective-C
+- Support for Swift and Objective-C file associations
 - Automatic formatting and linting setup
+
+**Note:** This container provides general development tools and Copilot configuration. Actual iOS app compilation requires macOS with Xcode installed. The devcontainer is suitable for documentation, scripts, configuration, and leveraging Copilot's assistance.
 
 To use the development container:
 1. Install Docker and VS Code with the Remote-Containers extension
