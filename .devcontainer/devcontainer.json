@@ -1,0 +1,57 @@
+{
+  "name": "iOS Development Environment",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "GitHub.vscode-pull-request-github",
+        "ms-vscode.vscode-typescript-next",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "github.copilot.enable": {
+          "*": true,
+          "yaml": true,
+          "plaintext": true,
+          "markdown": true,
+          "swift": true,
+          "objective-c": true
+        },
+        "github.copilot.advanced": {
+          "debug.overrideEngine": "gpt-4",
+          "debug.useNodeFetcher": true
+        },
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll": "explicit"
+        },
+        "files.associations": {
+          "*.swift": "swift",
+          "*.h": "objective-c",
+          "*.m": "objective-c"
+        }
+      }
+    }
+  },
+
+  "forwardPorts": [3000, 8080],
+
+  "postCreateCommand": "echo 'Development environment ready!'",
+
+  "remoteUser": "vscode"
+}
