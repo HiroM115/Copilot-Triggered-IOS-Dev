@@ -1,0 +1,85 @@
+name: iOS Build and Test
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    name: Build and Test iOS App
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+    
+    - name: Show Xcode version
+      run: xcodebuild -version
+    
+    - name: Show available devices
+      run: xcrun simctl list devices available
+    
+    - name: Build for iOS Simulator
+      run: |
+        xcodebuild clean build \
+          -project AIDrivenIOSApp.xcodeproj \
+          -scheme AIDrivenIOSApp \
+          -sdk iphonesimulator \
+          -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO
+    
+    - name: Run Unit Tests
+      run: |
+        xcodebuild test \
+          -project AIDrivenIOSApp.xcodeproj \
+          -scheme AIDrivenIOSApp \
+          -sdk iphonesimulator \
+          -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGNING_ALLOWED=NO
+    
+    - name: Archive test results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: |
+          build/Logs/Test/*.xcresult
+        retention-days: 5
+    
+  swift-package-test:
+    name: Swift Package Manager Tests
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Run Swift Package Tests
+      run: swift test --enable-code-coverage
+      continue-on-error: true
+    
+    - name: Generate code coverage report
+      run: |
+        xcrun llvm-cov export -format="lcov" \
+          .build/debug/AIDrivenIOSAppPackageTests.xctest/Contents/MacOS/AIDrivenIOSAppPackageTests \
+          -instr-profile .build/debug/codecov/default.profdata > coverage.lcov
+      continue-on-error: true
+    
+    - name: Upload coverage to artifact
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: coverage-report
+        path: coverage.lcov
+        retention-days: 5

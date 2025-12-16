@@ -6,6 +6,8 @@
 
 iPhone/iPad 上で GitHub Copilot Pro を活用した AI 駆動開発のためのサンプルプロジェクトです。
 
+> 📚 **すぐに始めたい方は [QUICKSTART.md](./QUICKSTART.md) をご覧ください！**
+
 ## 🎯 プロジェクトの目的
 
 このプロジェクトは、GitHub Copilot Pro を最大限に活用して iOS アプリケーション開発を効率化する方法を示します。SwiftUI を使用したモダンな iOS 開発のベストプラクティスを学べます。
