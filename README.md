@@ -60,7 +60,3 @@ To use MCP servers with Copilot:
 ## Contributing
 
 When contributing to this project, please follow the guidelines in `.github/copilot-instructions.md` to maintain consistency with the project's coding standards and best practices.
-
-## License
-
-This project is open source and available under the MIT License.

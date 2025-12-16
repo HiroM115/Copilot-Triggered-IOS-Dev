@@ -2,7 +2,7 @@
   "mcpServers": {
     "filesystem": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/home/runner/work/Copilot-Triggered-IOS-Dev/Copilot-Triggered-IOS-Dev"],
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."],
       "description": "Provides filesystem access for reading and writing project files"
     },
     "github": {
@@ -15,7 +15,7 @@
     },
     "git": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-git", "/home/runner/work/Copilot-Triggered-IOS-Dev/Copilot-Triggered-IOS-Dev"],
+      "args": ["-y", "@modelcontextprotocol/server-git", "."],
       "description": "Provides Git operations for version control"
     },
     "fetch": {

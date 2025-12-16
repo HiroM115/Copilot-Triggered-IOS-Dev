@@ -32,10 +32,6 @@
           "swift": true,
           "objective-c": true
         },
-        "github.copilot.advanced": {
-          "debug.overrideEngine": "gpt-4",
-          "debug.useNodeFetcher": true
-        },
         "editor.formatOnSave": true,
         "editor.codeActionsOnSave": {
           "source.fixAll": "explicit"
