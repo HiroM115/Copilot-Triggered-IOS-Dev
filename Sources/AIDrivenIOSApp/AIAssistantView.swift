@@ -68,7 +68,7 @@ struct AIAssistantView: View {
             .navigationTitle("AI Assistant")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItemGroup(placement: .navigationBarLeading) {
                     Button("Done") {
                         dismiss()
                     }
