@@ -208,6 +208,19 @@ swift test --enable-code-coverage
 2. `⌘ + U` でテストを実行
 3. Test Navigatorで個別のテストを実行可能
 
+### 注意事項
+
+⚠️ **Linux環境について**: このプロジェクトはSwiftUIを使用しているため、Linux環境ではビルドに失敗します。BDDテストを実行するには、macOS + Xcodeが必要です。
+
+macOS環境では以下のように実行できます：
+```bash
+# macOSのみ - すべてのテストを実行
+swift test
+
+# macOSのみ - 特定のSpecを実行
+swift test --filter AIDrivenUtilitiesSpec
+```
+
 ## BDDのベストプラクティス
 
 ### 1. 意味のある記述子を使用
