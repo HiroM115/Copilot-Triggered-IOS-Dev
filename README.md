@@ -68,6 +68,7 @@ open Package.swift
 | ドキュメント | 説明 | 所要時間 |
 |------------|------|---------|
 | [QUICKSTART.md](docs/QUICKSTART.md) | 5分で始める実践ガイド | 5分 |
+| [BDD_TESTING.md](docs/BDD_TESTING.md) | Quick/Nimble BDD テスト完全ガイド | 20分 |
 | [COPILOT_GUIDE.md](docs/COPILOT_GUIDE.md) | Copilot活用パターン・ショートカット | 30分 |
 | [BUILD_NOTES.md](docs/BUILD_NOTES.md) | macOS/Xcode要件の詳細説明 | 15分 |
 | [PROJECT_OVERVIEW.md](docs/PROJECT_OVERVIEW.md) | 学習パス・貢献ガイド | 1時間 |
@@ -292,6 +293,7 @@ SwiftUI is Apple platform-exclusive and not supported on Linux/Windows. See [BUI
 - [x] AIチャットインターフェース
 - [x] プラットフォーム非依存ユーティリティ
 - [x] 包括的ユニットテスト
+- [x] **BDD テストフレームワーク (Quick/Nimble)**
 - [x] 日本語ドキュメント
 - [x] CI/CDパイプライン
 - [x] CodeQLセキュリティスキャン
