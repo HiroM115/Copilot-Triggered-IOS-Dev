@@ -47,8 +47,7 @@ Copilot-Triggered-IOS-Dev/
 │   └── PROJECT_OVERVIEW.md           # このファイル / This file
 ├── .github/
 │   ├── workflows/
-│   │   ├── ios-build.yml             # iOSビルドCI / iOS build CI
-│   │   └── codeql.yml                # セキュリティスキャン / Security scan
+│   │   └── ios-build.yml              # iOSビルドCI / iOS build CI
 │   ├── copilot-instructions.md       # Copilot設定 / Copilot config
 │   └── copilot-mcp-config.json       # MCP設定 / MCP config
 ├── .devcontainer/
@@ -187,19 +186,14 @@ swift test --filter AIDrivenUtilitiesTests.testEmailValidation
 
 ### 実装済みのセキュリティ対策 / Implemented Security Measures
 
-1. **CodeQLスキャン** / CodeQL Scanning
-   - Swiftコードの自動脆弱性検出
-   - プルリクエストごとにスキャン
-
-2. **メモリ管理** / Memory Management
+1. **メモリ管理** / Memory Management
    - タイマーの適切な無効化
    - メモリリークの防止
 
-3. **GitHub Actionsパーミッション** / GitHub Actions Permissions
+2. **GitHub Actionsパーミッション** / GitHub Actions Permissions
    ```yaml
    permissions:
      contents: read
-     security-events: write
    ```
 
 ### セキュリティベストプラクティス / Security Best Practices
@@ -213,7 +207,7 @@ swift test --filter AIDrivenUtilitiesTests.testEmailValidation
 
 ### ワークフロー / Workflows
 
-#### 1. iOS Build Workflow
+#### iOS Build Workflow
 ```yaml
 name: iOS Build and Test
 on: [push, pull_request]
@@ -225,19 +219,6 @@ jobs:
       - Build with Swift
       - Run Tests
       - Code Coverage
-```
-
-#### 2. CodeQL Workflow
-```yaml
-name: CodeQL Analysis
-on: [push, pull_request, schedule]
-jobs:
-  analyze:
-    runs-on: macos-latest  # Swift requires macOS
-    steps:
-      - Initialize CodeQL
-      - Build
-      - Analyze
 ```
 
 ## 📚 学習パス / Learning Paths

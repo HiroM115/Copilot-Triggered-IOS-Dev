@@ -24,7 +24,6 @@ Production-ready iOS application demonstrating AI-driven development with GitHub
 - ✅ BDD仕様テスト (Quick/Nimble)
 
 ### 🔒 プロダクション品質
-- **CodeQL統合** - 自動セキュリティスキャン
 - **CI/CDパイプライン** - iOS自動ビルド・テスト
 - **BDD Test Framework** - Quick 7.6+ / Nimble 13.6+
 - **メモリリーク対策** - ThinkingIndicatorでのTimer無効化
@@ -143,8 +142,7 @@ docs/
 └── PROJECT_OVERVIEW.md       # 完全な学習パス
 
 .github/workflows/
-├── ios-build.yml             # iOS CI/CD
-└── codeql.yml                # セキュリティスキャン
+└── ios-build.yml             # iOS CI/CD
 ```
 
 ## 🤖 GitHub Copilot Configuration
@@ -220,18 +218,11 @@ SwiftUI is Apple platform-exclusive and not supported on Linux/Windows. See [BUI
 - ユニットテスト自動実行
 - コードカバレッジレポート
 
-**CodeQL Security Scan**
-- Swift言語対応
-- プルリクエストごとにスキャン
-- 定期スケジュール実行 (毎週土曜)
-- セキュリティイベント書き込み権限
-
 ### セキュリティ機能 / Security Features
 
 ✅ **メモリリーク防止** - Timer無効化in `ThinkingIndicator.onDisappear()`  
 ✅ **最小権限原則** - Actions permissions: `contents: read`  
-✅ **入力検証** - メールアドレス正規表現バリデーション  
-✅ **自動スキャン** - CodeQLによる脆弱性検出
+✅ **入力検証** - メールアドレス正規表現バリデーション
 
 ## 🎓 学習パス / Learning Path
 
@@ -296,7 +287,6 @@ SwiftUI is Apple platform-exclusive and not supported on Linux/Windows. See [BUI
 - [x] **BDD テストフレームワーク (Quick/Nimble)**
 - [x] 日本語ドキュメント
 - [x] CI/CDパイプライン
-- [x] CodeQLセキュリティスキャン
 
 ### 📋 フェーズ2: 機能拡張 (計画中 / Planned)
 - [ ] 実際のAI API統合
