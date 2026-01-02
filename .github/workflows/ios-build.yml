@@ -29,13 +29,14 @@ jobs:
     
     - name: Build with Swift Package Manager
       run: |
-        # Build using Swift Package Manager
-        swift build
+        # Build using Swift Package Manager with macOS SDK
+        # Use sdk parameter to ensure proper SDK linkage for SwiftUI
+        swift build -Xswiftc "-sdk" -Xswiftc "$(xcrun --sdk macosx --show-sdk-path)"
     
     - name: Run tests
       run: |
-        # Run tests using Swift Package Manager with code coverage
-        swift test --enable-code-coverage
+        # Run tests using Swift Package Manager with code coverage and macOS SDK
+        swift test --enable-code-coverage -Xswiftc "-sdk" -Xswiftc "$(xcrun --sdk macosx --show-sdk-path)"
     
     - name: Generate code coverage report
       run: |
