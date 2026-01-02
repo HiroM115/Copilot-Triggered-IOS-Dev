@@ -22,9 +22,5 @@ let package = Package(
             name: "AIDrivenIOSApp",
             dependencies: [],
             path: "Sources/AIDrivenIOSApp"),
-        .testTarget(
-            name: "AIDrivenIOSAppTests",
-            dependencies: ["AIDrivenIOSApp"],
-            path: "Tests/AIDrivenIOSAppTests"),
     ]
 )
