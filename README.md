@@ -21,11 +21,12 @@ Production-ready iOS application demonstrating AI-driven development with GitHub
 - ✉️ メールアドレス検証（RFC 5322準拠）
 - 📅 日付フォーマット（長形式・相対時間）
 - 🔢 UUID生成（フル・短縮形式）
-- ✅ 包括的なユニットテスト
+- ✅ BDD仕様テスト (Quick/Nimble)
 
 ### 🔒 プロダクション品質
 - **CodeQL統合** - 自動セキュリティスキャン
 - **CI/CDパイプライン** - iOS自動ビルド・テスト
+- **BDD Test Framework** - Quick 7.6+ / Nimble 13.6+
 - **メモリリーク対策** - ThinkingIndicatorでのTimer無効化
 - **最小権限** - GitHub Actions permissions: `contents: read`
 
@@ -73,15 +74,37 @@ open Package.swift
 
 ## 🧪 テスト / Testing
 
-### ユニットテスト例 / Unit Test Example
+### BDD (振る舞い駆動開発) / Behavior-Driven Development
+
+このプロジェクトでは**Quick**と**Nimble**を使用したBDDテストを採用しています。
+This project uses **Quick** and **Nimble** for Behavior-Driven Development testing.
+
+**Quick**: Swift/Objective-C向けBDDフレームワーク  
+**Nimble**: 表現力豊かなマッチャーライブラリ
+
+#### BDDテスト例 / BDD Test Example
 
 ```swift
-func testEmailValidation() throws {
-    // Given: 有効なメールアドレス
-    XCTAssertTrue(AIDrivenUtilities.isValidEmail("user@example.com"))
-    
-    // Given: 無効なメールアドレス
-    XCTAssertFalse(AIDrivenUtilities.isValidEmail("invalid.email"))
+import Quick
+import Nimble
+@testable import AIDrivenIOSApp
+
+final class AIDrivenUtilitiesSpec: QuickSpec {
+    override class func spec() {
+        describe("email validation") {
+            context("when email is valid") {
+                it("returns true for standard email") {
+                    expect(AIDrivenUtilities.isValidEmail("user@example.com")).to(beTrue())
+                }
+            }
+            
+            context("when email is invalid") {
+                it("returns false for email without @") {
+                    expect(AIDrivenUtilities.isValidEmail("userexample.com")).to(beFalse())
+                }
+            }
+        }
+    }
 }
 ```
 
@@ -89,7 +112,14 @@ func testEmailValidation() throws {
 ```bash
 swift test                           # 全テスト
 swift test --enable-code-coverage   # カバレッジ付き
+swift test --filter AIDrivenUtilitiesSpec  # 特定のSpec実行
 ```
+
+**BDDテストの構造** / BDD Test Structure:
+- `describe`: テスト対象の機能や振る舞いを説明
+- `context`: 特定の状況や前提条件を定義
+- `it`: 期待される振る舞いを記述
+- `expect(...).to(...)`: Nimbleマッチャーで期待値を検証
 
 **注意** / Note: SwiftUI UIコンポーネントはmacOS + Xcode必須。Linuxビルドは意図的にUI部分で失敗しますが、ユーティリティ層のテストは通過します。
 
@@ -103,7 +133,7 @@ Sources/AIDrivenIOSApp/
 └── AIDrivenUtilities.swift    # プラットフォーム非依存ユーティリティ
 
 Tests/AIDrivenIOSAppTests/
-└── AIDrivenUtilitiesTests.swift # ユニットテスト
+└── AIDrivenUtilitiesSpec.swift  # BDD仕様テスト (Quick/Nimble)
 
 docs/
 ├── QUICKSTART.md              # 5分クイックスタート
