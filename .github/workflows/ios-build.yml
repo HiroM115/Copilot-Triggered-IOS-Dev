@@ -29,39 +29,31 @@ jobs:
     
     - name: Build with Swift Package Manager
       run: |
-        # Build using xcodebuild for proper SDK support
-        xcodebuild -scheme AIDrivenIOSApp -destination 'platform=macOS' build
+        # Build using Swift Package Manager with macOS SDK
+        # Use sdk parameter to ensure proper SDK linkage for SwiftUI
+        swift build -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk macosx --show-sdk-path`"
     
     - name: Run tests
       run: |
-        # Run tests using xcodebuild with code coverage
-        xcodebuild -scheme AIDrivenIOSApp -destination 'platform=macOS' test -enableCodeCoverage YES
+        # Run tests using Swift Package Manager with code coverage and macOS SDK
+        swift test --enable-code-coverage -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk macosx --show-sdk-path`"
     
     - name: Generate code coverage report
       run: |
-        # Generate code coverage report using xcov
-        # Find the xcresult bundle from the test run
-        XCRESULT_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "*.xcresult" | head -1)
-        if [ -n "$XCRESULT_PATH" ]; then
-          echo "Found xcresult at: $XCRESULT_PATH"
-          # Export coverage using xccov
-          xcrun xccov view --report --json "$XCRESULT_PATH" > coverage.json || true
-          if [ -f coverage.json ]; then
-            echo "Coverage report generated (coverage.json)"
-          else
-            echo "Failed to generate coverage report"
-          fi
+        # Generate code coverage report using llvm-cov
+        xcrun llvm-cov export -format="lcov" .build/debug/AIDrivenIOSAppPackageTests.xctest/Contents/MacOS/AIDrivenIOSAppPackageTests -instr-profile .build/debug/codecov/default.profdata > coverage.lcov || true
+        if [ -f coverage.lcov ]; then
+          echo "Coverage report generated"
         else
-          echo "No xcresult file found"
+          echo "No coverage report generated"
         fi
     
     - name: Display coverage summary
       run: |
-        if [ -f coverage.json ]; then
-          echo "Code coverage report generated (coverage.json)"
-          echo "Coverage summary:"
-          # Extract and display coverage percentage
-          cat coverage.json | head -50 || true
+        if [ -f coverage.lcov ]; then
+          echo "Code coverage report generated (coverage.lcov)"
+          echo "Summary of covered files:"
+          grep -E "^SF:" coverage.lcov | sed 's/SF://' | head -20 || true
         else
           echo "No coverage report generated"
         fi
